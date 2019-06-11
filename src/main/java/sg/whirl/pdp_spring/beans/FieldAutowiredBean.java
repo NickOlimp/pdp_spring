@@ -3,5 +3,5 @@ package sg.whirl.pdp_spring.beans;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AutowiredBean {
+public class FieldAutowiredBean {
 }
