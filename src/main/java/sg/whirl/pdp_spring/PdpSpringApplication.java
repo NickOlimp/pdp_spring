@@ -21,13 +21,16 @@ public class PdpSpringApplication {
 
     private final ConstructorAutowiredBean constructorAutowiredBean;
 
+    private final Object namedBean;
+
     @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
     }
 
-    public PdpSpringApplication(ConstructorAutowiredBean bean) {
+    public PdpSpringApplication(ConstructorAutowiredBean bean, Object namedBean) {
         this.constructorAutowiredBean = bean;
+        this.namedBean = namedBean;
     }
 
     @PostConstruct
@@ -37,6 +40,7 @@ public class PdpSpringApplication {
         System.out.println("fieldAutowiredBean " + ( fieldAutowiredBean == null ? "NOT " : "") + "initialized.");
         System.out.println("setterAutowiredBean " + ( setterAutowiredBean == null ? "NOT " : "") + "initialized.");
         System.out.println("constructorAutowiredBean " + ( constructorAutowiredBean == null ? "NOT " : "") + "initialized.");
+        System.out.println("namedBean " + ( namedBean == null ? "NOT " : "") + "initialized.");
 
         System.out.println();
     }
