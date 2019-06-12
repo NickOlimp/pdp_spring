@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import sg.whirl.pdp_spring.beans.*;
+import sg.whirl.pdp_spring.beans.ConstructorAutowiredBean;
+import sg.whirl.pdp_spring.beans.FieldAutowiredBean;
+import sg.whirl.pdp_spring.beans.NonDeclaredBean;
+import sg.whirl.pdp_spring.beans.SetterAutowiredBean;
 import sg.whirl.pdp_spring.interfaces.BeanInterface;
 
 import javax.annotation.PostConstruct;
@@ -31,6 +34,9 @@ public class PdpSpringApplication {
     private BeanInterface qualifiedBean;
 
     @Autowired
+    private BeanInterface primaryBean;
+
+    @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
     }
@@ -50,6 +56,7 @@ public class PdpSpringApplication {
         System.out.println("namedBean " + (namedBean == null ? "NOT " : "(" + namedBean.getClass().getSimpleName() + ") ") + "initialized.");
         System.out.println("nonexistentBean " + (nonexistentBean == null ? "NOT " : "") + "initialized.");
         System.out.println("qualifiedBean " + (qualifiedBean == null ? "NOT " : "(" + qualifiedBean.getClass().getSimpleName() + ") ") + "initialized.");
+        System.out.println("primaryBean " + (primaryBean == null ? "NOT " : "(" + primaryBean.getClass().getSimpleName() + ") ") + "initialized.");
 
         System.out.println();
     }
