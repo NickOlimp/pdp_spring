@@ -7,7 +7,7 @@ import sg.whirl.pdp_spring.beans.DefaultBean;
 @Configuration
 public class AppConfig {
 
-    @Bean
+    @Bean(name = "namedBean")
     public DefaultBean namedBean() {
         return new DefaultBean();
     }
