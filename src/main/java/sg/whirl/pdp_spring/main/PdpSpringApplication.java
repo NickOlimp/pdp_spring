@@ -12,6 +12,8 @@ import sg.whirl.pdp_spring.beans.SetterAutowiredBean;
 import sg.whirl.pdp_spring.interfaces.BeanInterface;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "sg.whirl.pdp_spring")
@@ -37,6 +39,9 @@ public class PdpSpringApplication {
     private BeanInterface primaryBean;
 
     @Autowired
+    private List<BeanInterface> beanList;
+
+    @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
     }
@@ -57,6 +62,11 @@ public class PdpSpringApplication {
         System.out.println("nonexistentBean " + (nonexistentBean == null ? "NOT " : "") + "initialized.");
         System.out.println("qualifiedBean " + (qualifiedBean == null ? "NOT " : "(" + qualifiedBean.getClass().getSimpleName() + ") ") + "initialized.");
         System.out.println("primaryBean " + (primaryBean == null ? "NOT " : "(" + primaryBean.getClass().getSimpleName() + ") ") + "initialized.");
+        System.out.println("beanList " + ( beanList == null ? "NOT " : "(" + beanList.stream()
+                .map( Object::getClass )
+                .map( Class::getSimpleName )
+                .collect( Collectors.joining(","))
+                + ") " ) + "initialized.");
 
         System.out.println();
     }
