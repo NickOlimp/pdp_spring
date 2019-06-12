@@ -1,15 +1,17 @@
-package sg.whirl.pdp_spring;
+package sg.whirl.pdp_spring.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import sg.whirl.pdp_spring.beans.*;
 import sg.whirl.pdp_spring.interfaces.BeanInterface;
 
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "sg.whirl.pdp_spring")
 public class PdpSpringApplication {
 
     @Autowired
