@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import sg.whirl.pdp_spring.beans.ConstructorAutowiredBean;
-import sg.whirl.pdp_spring.beans.FieldAutowiredBean;
-import sg.whirl.pdp_spring.beans.SetterAutowiredBean;
+import sg.whirl.pdp_spring.beans.*;
+import sg.whirl.pdp_spring.interfaces.BeanInterface;
 
 import javax.annotation.PostConstruct;
 
@@ -21,6 +20,13 @@ public class PdpSpringApplication {
     private final ConstructorAutowiredBean constructorAutowiredBean;
 
     private final Object namedBean;
+
+    @Autowired(required = false)
+    private NonDeclaredBean nonexistentBean;
+
+    @Autowired
+    @Qualifier("bean2")
+    private BeanInterface qualifiedBean;
 
     @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
@@ -39,7 +45,9 @@ public class PdpSpringApplication {
         System.out.println("fieldAutowiredBean " + (fieldAutowiredBean == null ? "NOT " : "") + "initialized.");
         System.out.println("setterAutowiredBean " + (setterAutowiredBean == null ? "NOT " : "") + "initialized.");
         System.out.println("constructorAutowiredBean " + (constructorAutowiredBean == null ? "NOT " : "") + "initialized.");
-        System.out.println("namedBean " + (namedBean == null ? "NOT " : namedBean.getClass().getSimpleName() + " ") + "initialized.");
+        System.out.println("namedBean " + (namedBean == null ? "NOT " : "(" + namedBean.getClass().getSimpleName() + ") ") + "initialized.");
+        System.out.println("nonexistentBean " + (nonexistentBean == null ? "NOT " : "") + "initialized.");
+        System.out.println("qualifiedBean " + (qualifiedBean == null ? "NOT " : "(" + qualifiedBean.getClass().getSimpleName() + ") ") + "initialized.");
 
         System.out.println();
     }
