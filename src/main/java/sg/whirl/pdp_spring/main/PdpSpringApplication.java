@@ -12,6 +12,7 @@ import sg.whirl.pdp_spring.beans.SetterAutowiredBean;
 import sg.whirl.pdp_spring.interfaces.BeanInterface;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -52,6 +53,13 @@ public class PdpSpringApplication {
     @Autowired
     private Map<String, Integer> stringIntegerMap;
 
+    @Autowired(required = false)
+    private List<NonDeclaredBean> emptyList = new ArrayList<>();
+
+    @Autowired
+    @Qualifier("selectedBeans")
+    private List<BeanInterface> selectedBeanList;
+
     @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
@@ -81,6 +89,12 @@ public class PdpSpringApplication {
         System.out.println("integerList " + (integerList == null ? "NOT " : "(" + integerList + ") ") + "initialized.");
         System.out.println("integerSet " + (integerSet == null ? "NOT " : "(" + integerSet + ") ") + "initialized.");
         System.out.println("stringIntegerMap " + (stringIntegerMap == null ? "NOT " : "(" + stringIntegerMap + ") ") + "initialized.");
+        System.out.println("emptyList " + (emptyList == null ? "NOT " : "(" + emptyList + ") ") + "initialized.");
+        System.out.println("selectedBeanList " + ( selectedBeanList == null ? "NOT " : "(" + selectedBeanList.stream()
+                .map( Object::getClass )
+                .map( Class::getSimpleName )
+                .collect( Collectors.joining(","))
+                + ") " ) + "initialized.");
 
         System.out.println();
     }
