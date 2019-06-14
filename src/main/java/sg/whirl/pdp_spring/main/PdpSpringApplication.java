@@ -72,6 +72,12 @@ public class PdpSpringApplication {
     private List<BeanImpl1> typeLimitedBeanList;
 
     @Autowired
+    private Item item1;
+
+    @Autowired
+    private Item item2;
+
+    @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
     }
@@ -118,6 +124,8 @@ public class PdpSpringApplication {
                 .map( Class::getSimpleName )
                 .collect( Collectors.joining(","))
                 + ") " ) + "initialized.");
+        System.out.println("item1 " + (item1 == null ? "NOT " : "(id=" + item1.getId() + ") ") + "initialized.");
+        System.out.println("item2 " + (item2 == null ? "NOT " : "(id=" + item2.getId() + ") ") + "initialized.");
 
         System.out.println();
     }

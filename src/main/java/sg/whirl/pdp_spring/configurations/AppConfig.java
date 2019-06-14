@@ -2,10 +2,7 @@ package sg.whirl.pdp_spring.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import sg.whirl.pdp_spring.beans.BeanImpl1;
-import sg.whirl.pdp_spring.beans.BeanImpl1A;
-import sg.whirl.pdp_spring.beans.BeanImpl1B;
-import sg.whirl.pdp_spring.beans.DefaultBean;
+import sg.whirl.pdp_spring.beans.*;
 
 import java.util.*;
 
@@ -44,5 +41,20 @@ public class AppConfig {
     @Bean
     public BeanImpl1 bean1B() {
         return new BeanImpl1B();
+    }
+
+    @Bean
+    public ItemFactory itemFactory() {
+        return new ItemFactory();
+    }
+
+    @Bean
+    public Item item1() {
+        return itemFactory().getObject();
+    }
+
+    @Bean
+    public Item item2() {
+        return itemFactory().getObject();
     }
 }
