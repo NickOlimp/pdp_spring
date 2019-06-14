@@ -11,6 +11,7 @@ import sg.whirl.pdp_spring.beans.*;
 import sg.whirl.pdp_spring.interfaces.BeanInterface;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +78,9 @@ public class PdpSpringApplication {
     @Autowired
     private Item item2;
 
+    @Resource(name = "&item")
+    private ItemFactory itemFactory;
+
     @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
@@ -126,6 +130,7 @@ public class PdpSpringApplication {
                 + ") " ) + "initialized.");
         System.out.println("item1 " + (item1 == null ? "NOT " : "(id=" + item1.getId() + ") ") + "initialized.");
         System.out.println("item2 " + (item2 == null ? "NOT " : "(id=" + item2.getId() + ") ") + "initialized.");
+        System.out.println("itemFactory " + (itemFactory == null ? "NOT " : "(" + itemFactory.getClass().getSimpleName() + ") ") + "initialized.");
 
         System.out.println();
     }

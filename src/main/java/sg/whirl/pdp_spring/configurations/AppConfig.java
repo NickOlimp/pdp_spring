@@ -43,7 +43,7 @@ public class AppConfig {
         return new BeanImpl1B();
     }
 
-    @Bean
+    @Bean(name = "item")
     public ItemFactory itemFactory() {
         return new ItemFactory();
     }
