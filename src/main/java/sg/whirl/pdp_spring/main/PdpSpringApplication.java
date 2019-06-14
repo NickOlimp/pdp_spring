@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import sg.whirl.pdp_spring.annotations.CorrectQualifier;
 import sg.whirl.pdp_spring.beans.ConstructorAutowiredBean;
 import sg.whirl.pdp_spring.beans.FieldAutowiredBean;
 import sg.whirl.pdp_spring.beans.NonDeclaredBean;
@@ -61,6 +62,10 @@ public class PdpSpringApplication {
     private List<BeanInterface> selectedBeanList;
 
     @Autowired
+    @CorrectQualifier
+    private List<BeanInterface> correctBeanList;
+
+    @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
     }
@@ -91,6 +96,11 @@ public class PdpSpringApplication {
         System.out.println("stringIntegerMap " + (stringIntegerMap == null ? "NOT " : "(" + stringIntegerMap + ") ") + "initialized.");
         System.out.println("emptyList " + (emptyList == null ? "NOT " : "(" + emptyList + ") ") + "initialized.");
         System.out.println("selectedBeanList " + ( selectedBeanList == null ? "NOT " : "(" + selectedBeanList.stream()
+                .map( Object::getClass )
+                .map( Class::getSimpleName )
+                .collect( Collectors.joining(","))
+                + ") " ) + "initialized.");
+        System.out.println("correctBeanList " + ( correctBeanList == null ? "NOT " : "(" + correctBeanList.stream()
                 .map( Object::getClass )
                 .map( Class::getSimpleName )
                 .collect( Collectors.joining(","))
