@@ -2,6 +2,9 @@ package sg.whirl.pdp_spring.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import sg.whirl.pdp_spring.beans.BeanImpl1;
+import sg.whirl.pdp_spring.beans.BeanImpl1A;
+import sg.whirl.pdp_spring.beans.BeanImpl1B;
 import sg.whirl.pdp_spring.beans.DefaultBean;
 
 import java.util.*;
@@ -31,5 +34,15 @@ public class AppConfig {
         map.put( "2", 2 );
         map.put( "3", 3 );
         return map;
+    }
+
+    @Bean
+    public BeanImpl1 bean1A() {
+        return new BeanImpl1A();
+    }
+
+    @Bean
+    public BeanImpl1 bean1B() {
+        return new BeanImpl1B();
     }
 }

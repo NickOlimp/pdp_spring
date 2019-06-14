@@ -6,10 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import sg.whirl.pdp_spring.annotations.CorrectQualifier;
-import sg.whirl.pdp_spring.beans.ConstructorAutowiredBean;
-import sg.whirl.pdp_spring.beans.FieldAutowiredBean;
-import sg.whirl.pdp_spring.beans.NonDeclaredBean;
-import sg.whirl.pdp_spring.beans.SetterAutowiredBean;
+import sg.whirl.pdp_spring.beans.*;
 import sg.whirl.pdp_spring.interfaces.BeanInterface;
 
 import javax.annotation.PostConstruct;
@@ -66,6 +63,9 @@ public class PdpSpringApplication {
     private List<BeanInterface> correctBeanList;
 
     @Autowired
+    private List<BeanImpl1> typeLimitedBeanList;
+
+    @Autowired
     public void setSetterAutowiredBean(SetterAutowiredBean bean) {
         this.setterAutowiredBean = bean;
     }
@@ -101,6 +101,11 @@ public class PdpSpringApplication {
                 .collect( Collectors.joining(","))
                 + ") " ) + "initialized.");
         System.out.println("correctBeanList " + ( correctBeanList == null ? "NOT " : "(" + correctBeanList.stream()
+                .map( Object::getClass )
+                .map( Class::getSimpleName )
+                .collect( Collectors.joining(","))
+                + ") " ) + "initialized.");
+        System.out.println("typeLimitedBeanList " + ( typeLimitedBeanList == null ? "NOT " : "(" + typeLimitedBeanList.stream()
                 .map( Object::getClass )
                 .map( Class::getSimpleName )
                 .collect( Collectors.joining(","))
