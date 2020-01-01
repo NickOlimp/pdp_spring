@@ -92,6 +92,9 @@ public class PdpSpringApplication {
         this(bean, "defaultValue");
     }
 
+    @Autowired(required = false)
+    private DevProfileBean devProfileBean;
+
     @PostConstruct
     void initialized() {
         System.out.println();
@@ -131,6 +134,7 @@ public class PdpSpringApplication {
         System.out.println("item1 " + (item1 == null ? "NOT " : "(id=" + item1.getId() + ") ") + "initialized.");
         System.out.println("item2 " + (item2 == null ? "NOT " : "(id=" + item2.getId() + ") ") + "initialized.");
         System.out.println("itemFactory " + (itemFactory == null ? "NOT " : "(" + itemFactory.getClass().getSimpleName() + ") ") + "initialized.");
+        System.out.println("devProfileBean " + (devProfileBean == null ? "NOT " : "(" + devProfileBean.getClass().getSimpleName() + ") ") + "initialized.");
 
         System.out.println();
     }
