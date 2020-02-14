@@ -1,13 +1,40 @@
 package sg.whirl.pdp_spring.configurations;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import sg.whirl.pdp_spring.beans.*;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Configuration
 public class AppConfig {
+
+    @Autowired
+    public Environment env;
+
+    @Value("${test.value:defaultValue}")
+    public String testValue;
+
+    public String envValue;
+
+    @Value("${test.nonexistentValue:defaultValue}")
+    public String defaultValue;
+
+
+    @Value("${test.profileProp}")
+    public String profileValue;
+
+    @Value("${directIntProp}")
+    public int directPropIntValue;
+
+    @PostConstruct
+    public void init() {
+        this.envValue = env.getProperty("test.envValue");
+    }
 
     @Bean(name = "namedBean")
     public DefaultBean namedBean() {
@@ -27,9 +54,9 @@ public class AppConfig {
     @Bean
     public Map<String, Integer> strIntMap() {
         HashMap<String, Integer> map = new HashMap<>();
-        map.put( "1", 1 );
-        map.put( "2", 2 );
-        map.put( "3", 3 );
+        map.put("1", 1);
+        map.put("2", 2);
+        map.put("3", 3);
         return map;
     }
 
