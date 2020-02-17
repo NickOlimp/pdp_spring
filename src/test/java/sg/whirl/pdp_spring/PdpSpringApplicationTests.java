@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import sg.whirl.pdp_spring.configurations.AppConfig;
+import sg.whirl.pdp_spring.configurations.Prefixed;
 import sg.whirl.pdp_spring.main.PdpSpringApplication;
 
 @RunWith( SpringRunner.class )
@@ -21,6 +22,9 @@ public class PdpSpringApplicationTests {
 
     @Autowired
     AppConfig appConfig;
+
+    @Autowired
+    Prefixed prefixed;
 
     @Test
     public void contextLoads() {
@@ -49,6 +53,12 @@ public class PdpSpringApplicationTests {
     @Test
     public void testDirectPropertyValue() {
         Assert.assertEquals(5, appConfig.directPropIntValue);
+    }
+
+    @Test
+    public void testPrefixedPropertyValue() {
+        Assert.assertEquals("prefValue1", prefixed.getField1());
+        Assert.assertEquals("prefValue2", prefixed.getField2());
     }
 
 }
