@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.util.collections.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,7 @@ import sg.whirl.pdp_spring.main.PdpSpringApplication;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PdpSpringApplication.class, properties = {"directIntProp=5"})
@@ -177,29 +179,30 @@ public class PdpSpringApplicationTests {
         Assert.assertEquals(BeanImpl3.class, primaryBean.getClass());
     }
 
-    private <E> boolean listContainsClass(@NonNull List<E> list, @NonNull Class cl) {
-        return list.stream()
-                .map(Object::getClass)
-                .anyMatch(cl::equals);
+    private <E> void assertListContainsClasses(@NonNull List<E> list, @NonNull Class... cls) {
+        assertListContainsClasses(new HashSet<>(list), cls);
     }
 
-    // TODO rewrite to check that ONLY the given classes are present
-    private <E> boolean listContainsClasses(@NonNull List<E> list, @NonNull Class... cls) {
-        return Arrays.stream(cls)
-                .allMatch(cl -> listContainsClass(list, cl));
+    private <E> void assertListContainsClasses(@NonNull Set<E> list, @NonNull Class... cls) {
+        Assert.assertEquals(
+                Sets.newSet(cls),
+                list.stream()
+                        .map(E::getClass)
+                        .collect(Collectors.toSet())
+        );
     }
 
     @Test
     public void testAutowiredBeanList() {
         Assert.assertNotNull(beanList);
-        Assert.assertTrue(listContainsClasses(
+        assertListContainsClasses(
                 beanList,
                 BeanImpl1.class,
                 BeanImpl1A.class,
                 BeanImpl1B.class,
                 BeanImpl2.class,
                 BeanImpl3.class
-        ));
+        );
     }
 
     @Test
@@ -233,30 +236,30 @@ public class PdpSpringApplicationTests {
     @Test
     public void testQualifiedBeanList() {
         Assert.assertNotNull(selectedBeanList);
-        Assert.assertTrue(listContainsClasses(
+        assertListContainsClasses(
                 selectedBeanList,
                 BeanImpl2.class
-        ));
+        );
     }
 
     @Test
     public void testCustomQualifiedBeanList() {
         Assert.assertNotNull(correctBeanList);
-        Assert.assertTrue(listContainsClasses(
+        assertListContainsClasses(
                 correctBeanList,
                 BeanImpl1.class
-        ));
+        );
     }
 
     @Test
     public void testTypeLimitedBeanList() {
         Assert.assertNotNull(typeLimitedBeanList);
-        Assert.assertTrue(listContainsClasses(
+        assertListContainsClasses(
                 typeLimitedBeanList,
                 BeanImpl1.class,
                 BeanImpl1A.class,
                 BeanImpl1B.class
-        ));
+        );
     }
 
     @Test
