@@ -53,7 +53,7 @@ public class AppConfig {
 
     @Bean
     public Map<String, Integer> strIntMap() {
-        HashMap<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("1", 1);
         map.put("2", 2);
         map.put("3", 3);
