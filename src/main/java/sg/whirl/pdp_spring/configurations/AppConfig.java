@@ -28,7 +28,7 @@ public class AppConfig {
     @Value("${test.profileProp}")
     public String profileValue;
 
-    @Value("${directIntProp}")
+    @Value("${directIntProp:1}")
     public int directPropIntValue;
 
     @PostConstruct
